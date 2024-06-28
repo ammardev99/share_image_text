@@ -86,18 +86,17 @@ class _ShareAppState extends State<ShareApp> {
                   onPressed: () async {
                     if (formKey.currentState!.validate()) {
                       // await Share.share(textController.text);
-                      await Share.shareXFiles([XFile(imagePick!.path)], text: textController.text);
-
-
+                      await Share.shareXFiles([XFile(imagePick!.path)],
+                          text: textController.text);
                     }
                     // ignore: avoid_print
                     print('press share');
                   },
                   style: const ButtonStyle(
-                    minimumSize: WidgetStatePropertyAll(Size(double.infinity,50)),
+                    minimumSize:
+                        WidgetStatePropertyAll(Size(double.infinity, 50)),
                     elevation: WidgetStatePropertyAll(3),
-                    backgroundColor:
-                        WidgetStatePropertyAll(Color(0xFF0787FF)),
+                    backgroundColor: WidgetStatePropertyAll(Color(0xFF0787FF)),
                   ),
                   child: const Text(
                     "Share",
