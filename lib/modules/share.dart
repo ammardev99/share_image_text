@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:share/modules/widgets.dart';
 
 class ShareApp extends StatefulWidget {
   const ShareApp({super.key});
@@ -32,12 +33,10 @@ class _ShareAppState extends State<ShareApp> {
     return Scaffold(
 // app bar
       appBar: AppBar(
-        title: const Text(
-          "Share App",
-          style: TextStyle(fontWeight: FontWeight.w500),
-        ),
+        title: boldText("Share App"),
         centerTitle: true,
       ),
+
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         physics: const BouncingScrollPhysics(),
@@ -47,10 +46,8 @@ class _ShareAppState extends State<ShareApp> {
             key: formKey,
             child: Column(
               children: [
-                const SizedBox(
-                  height: 20,
-                ),
-                // pick image
+                sizeBox(20),
+// pick image
                 InkWell(
                   onTap: () => getImage(),
                   borderRadius: BorderRadius.circular(15),
@@ -58,82 +55,52 @@ class _ShareAppState extends State<ShareApp> {
                     width: 320,
                     height: 320,
                     child: Center(
-                        child:
-// image icon
-                            imagePick == null
-                                ? const SizedBox(
-                                    height: 80,
-                                    child: Icon(
-                                      Icons.image,
-                                      color: Colors.grey,
-                                      size: 60,
-                                    ),
-                                  )
-                                : Image.file(
-                                    File(imagePick!.path),
-                                    fit: BoxFit.contain,
-                                  )),
+                        child: imagePick == null
+                            ? getImgIcon()
+                            : showImage(imagePick!.path)),
                   ),
                 ),
-                const SizedBox(height: 20,),
+                sizeBox(20),
 // enter text
-                Container(
-                  margin: const EdgeInsets.all(10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      TextFormField(
-                          controller: textController,
-                          decoration: const InputDecoration(
-                            label: Text(
-                              "Enter Text",
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.bold),
-                            ),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(
-                              Radius.circular(5),
-                            )),
-                          ),
-                          maxLines: null,
-                          minLines: 1,
-                          validator: (value) {
-                            if ((value ?? "").isEmpty) {
-                              return 'text is required';
-                            }
-                            return null;
-                          }),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 20,),
+                TextFormField(
+                    controller: textController,
+                    decoration: InputDecoration(
+                      label: boldText('Enter Text'),
+                      border: const OutlineInputBorder(
+                          borderRadius: BorderRadius.all(
+                        Radius.circular(5),
+                      )),
+                    ),
+                    minLines: 1,
+                    maxLines: null,
+                    validator: (value) {
+                      if ((value ?? "").isEmpty) {
+                        return 'text is required';
+                      }
+                      return null;
+                    }),
+                sizeBox(20),
 // share button
-                Container(
-                  margin: const EdgeInsets.all(10),
-                  width: double.infinity,
-                  height: 50,
-                  child: ElevatedButton(
-                    onPressed: () async {
-                      if (!formKey.currentState!.validate()) {
-                        // await Share.share('text!');
-                        }
-                      // ignore: avoid_print
-                      print('share');
-                    },
-                    style: const ButtonStyle(
-                      elevation: WidgetStatePropertyAll(3),
-                      backgroundColor:
-                          WidgetStatePropertyAll(Color(0xFF0787FF)),
-                    ),
-                    child: const Text(
-                      "Share",
-                      style: TextStyle(color: Colors.white),
-                    ),
+                ElevatedButton(
+                  onPressed: () async {
+                    if (formKey.currentState!.validate()) {
+                      // await Share.share('text!');
+                    }
+                    // ignore: avoid_print
+                    print('press share');
+                  },
+                  style: const ButtonStyle(
+                    minimumSize: WidgetStatePropertyAll(Size(double.infinity,50)),
+                    elevation: WidgetStatePropertyAll(3),
+                    backgroundColor:
+                        WidgetStatePropertyAll(Color(0xFF0787FF)),
+                  ),
+                  child: const Text(
+                    "Share",
+                    style: TextStyle(color: Colors.white),
                   ),
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
+                sizeBox(20),
               ],
             ),
           ),
@@ -142,4 +109,3 @@ class _ShareAppState extends State<ShareApp> {
     );
   }
 }
-
