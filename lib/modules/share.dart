@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:share/modules/widgets.dart';
+import 'package:share_plus/share_plus.dart';
 
 class ShareApp extends StatefulWidget {
   const ShareApp({super.key});
@@ -84,7 +85,10 @@ class _ShareAppState extends State<ShareApp> {
                 ElevatedButton(
                   onPressed: () async {
                     if (formKey.currentState!.validate()) {
-                      // await Share.share('text!');
+                      // await Share.share(textController.text);
+                      await Share.shareXFiles([XFile(imagePick!.path)], text: textController.text);
+
+
                     }
                     // ignore: avoid_print
                     print('press share');
