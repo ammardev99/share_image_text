@@ -16,20 +16,20 @@ Widget sizeBox(double w, [double? h]) {
   );
 }
 
-Widget getImgIcon() {
-  return const SizedBox(
-    height: 80,
-    child: Icon(
-      Icons.image,
-      color: Colors.grey,
-      size: 60,
-    ),
-  );
-}
+  Widget getImgIcon() {
+    return const SizedBox(
+      height: 80,
+      child: Icon(
+        Icons.image,
+        color: Colors.grey,
+        size: 60,
+      ),
+    );
+  }
 
-Widget showImage(String imgPath) {
-  return Image.file(
-    File(imgPath),
-    fit: BoxFit.contain,
-  );
-}
+  Widget showImage(String imgPath) {
+    return Image.file(
+      File(imgPath),
+      fit: BoxFit.contain,
+    );
+  }
